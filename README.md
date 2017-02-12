@@ -1,6 +1,6 @@
 # NativeScript Speech Recognition
 
-The plugin [demo](https://github.com/EddyVerbruggen/nativescript-speech-recognition/tree/master/demo) in action..
+This is the plugin [demo](https://github.com/EddyVerbruggen/nativescript-speech-recognition/tree/master/demo) in action..
 
 | ..while recognizing Dutch 🇳🇱 | .. after recognizing American-English 🇺🇸 |
 --- | --- | ---
@@ -73,7 +73,7 @@ import { SpeechRecognitionTranscription } from "nativescript-speech-recognition"
 
 this.speechRecognition.startListening(
   {
-    // optional, default uses the device locale
+    // optional, uses the device locale by default
     locale: "en-US",
     // this callback will be invoked repeatedly during recognition
     onResult: (transcription: SpeechRecognitionTranscription) => {
