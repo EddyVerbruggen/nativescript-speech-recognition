@@ -1,0 +1,13 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page">
+<StackLayout class="p-20">
+  <Label text="Speech Recognition" class="t-25 font-weight-bold text-center c-black" textWrap="true"/>
+  <!--<Label class="header" text="Search accessories not added to a Home, they'll be listed below" textWrap="true"/>-->
+  <StackLayout orientation="horizontal" horizontalAlignment="center">
+    <Button text="Dutch (nl-NL)" class="p-20" tap="{{ startListeningNL }}" visibility="{{ listening ? 'collapse' : 'visible' }}"/>
+    <Button text="English (en-US)" class="p-20" tap="{{ startListeningEN }}" visibility="{{ listening ? 'collapse' : 'visible' }}"/>
+    <Button text="Stop" class="p-20" tap="{{ stopListening }}" visibility="{{ listening ? 'visible' : 'collapse' }}"/>
+  </StackLayout>
+  <Label style="border-radius: 8" class="m-10 p-15 t-15 text-center c-bg-charcoal c-white" text="{{ feedback }}" textWrap="true"/>
+  <ActivityIndicator class="m-20" busy="{{ listening }}" visibility="{{ listening ? 'visible' : 'collapse' }}"/>
+</StackLayout>
+</Page>
