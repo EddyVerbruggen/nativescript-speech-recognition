@@ -1,0 +1,55 @@
+{
+  "name": "nativescript-speech-recognition",
+  "version": "1.0.0",
+  "description": "Speech to text plugin, leveraging Siri on iOS.",
+  "main": "speech-recognition",
+  "typings": "index.d.ts",
+  "nativescript": {
+    "platforms": {
+      "android": "2.5.0",
+      "ios": "2.5.0"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "demo.ios": "npm run preparedemo && cd demo && tns run ios --emulator",
+    "demo.ios.device": "npm run preparedemo && cd demo && tns run ios",
+    "demo.android": "npm run preparedemo && cd demo && tns run android --emulator",
+    "test.ios": "cd demo && tns test ios --emulator",
+    "test.ios.device": "cd demo && tns test ios",
+    "test.android": "cd demo && tns test android",
+    "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-speech-recognition && tns plugin add .. && tns install",
+    "setup": "npm i && cd demo && npm i && cd .. && npm run build && cd demo && tns plugin add .. && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EddyVerbruggen/nativescript-speech-recognition.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "JavaScript",
+    "iOS",
+    "Siri",
+    "Speech to text",
+    "Speech",
+    "Recognition",
+    "Voice"
+  ],
+  "author": {
+    "name": "Eddy Verbruggen",
+    "email": "eddyverbruggen@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/EddyVerbruggen/nativescript-speech-recognition/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/EddyVerbruggen/nativescript-speech-recognition",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "tns-core-modules": "^2.5.0",
+    "tns-platform-declarations": "^2.5.0",
+    "typescript": "^2.1.0",
+    "prompt": "^1.0.0",
+    "rimraf": "^2.5.0"
+  }
+}
