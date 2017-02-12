@@ -12,15 +12,6 @@ export class HelloWorldModel extends Observable {
     this.speechRecognition = new SpeechRecognition();
   }
 
-  public stopListening(): void {
-    let that = this;
-    this.speechRecognition.stopListening().then(() => {
-      that.set("listening", false);
-    }, (errorMessage: string) => {
-      console.log(`Error while trying to stop listening: ${errorMessage}`);
-    });
-  }
-
   public startListeningNL(): void {
     this.startListening("nl-NL");
   }
@@ -50,6 +41,15 @@ export class HelloWorldModel extends Observable {
       }, (errorMessage: string) => {
         console.log(`Error while trying to start listening: ${errorMessage}`);
       });
+    });
+  }
+
+  public stopListening(): void {
+    let that = this;
+    this.speechRecognition.stopListening().then(() => {
+      that.set("listening", false);
+    }, (errorMessage: string) => {
+      console.log(`Error while trying to stop listening: ${errorMessage}`);
     });
   }
 }
