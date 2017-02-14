@@ -1,6 +1,7 @@
 export interface SpeechRecognitionTranscription {
   text: string;
   finished: boolean;
+  // confidence: number; // TODO some day
 }
 
 export interface SpeechRecognitionOptions {
@@ -9,6 +10,11 @@ export interface SpeechRecognitionOptions {
    * Default: the system locale.
    */
   locale?: string;
+
+  /**
+   * Set to true to get results back continuously.
+   */
+  returnPartialResults?: boolean;
 
   /**
    * Thwe callback function invoked when speech is recognized.

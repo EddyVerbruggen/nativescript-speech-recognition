@@ -29,7 +29,6 @@ export class SpeechRecognition implements SpeechRecognitionApi {
       }
 
       if (this.recognitionTask !== null) {
-        console.log("--- cancel task");
         this.recognitionTask.cancel();
         this.recognitionTask = null;
       }
@@ -62,7 +61,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
           return;
         }
 
-        this.recognitionRequest.shouldReportPartialResults = true;
+        this.recognitionRequest.shouldReportPartialResults = options.returnPartialResults;
 
         this.recognitionTask = this.speechRecognizer.recognitionTaskWithRequestResultHandler(
             this.recognitionRequest,
@@ -74,7 +73,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
                 });
               }
 
-              if (error !== null || result.final) {
+              if (error !== null || (result !== null && result.final)) {
                 this.audioEngine.stop();
                 this.inputNode.removeTapOnBus(0);
                 this.recognitionRequest = null;
