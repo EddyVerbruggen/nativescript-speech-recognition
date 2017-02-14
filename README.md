@@ -17,7 +17,7 @@ tns plugin add nativescript-speech-recognition
 
 ### `available`
 
-Depending on the OS version a speech engine may not be available. For now Android always returns false, but an Android version is in the works!
+Depending on the OS version a speech engine may not be available.
 
 #### JavaScript
 ```js
