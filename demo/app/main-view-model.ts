@@ -28,12 +28,15 @@ export class HelloWorldModel extends Observable {
         that.set("feedback", "speech recognition not available");
         return;
       }
-
       that.speechRecognition.startListening(
           {
             onResult: (transcription: SpeechRecognitionTranscription) => {
               that.set("feedback", transcription.text);
+              if (transcription.finished) {
+                that.set("listening", false);
+              }
             },
+            returnPartialResults: true,
             locale: locale
           }
       ).then((started: boolean) => {

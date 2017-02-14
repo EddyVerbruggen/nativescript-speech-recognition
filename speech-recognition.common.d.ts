@@ -4,6 +4,7 @@ export interface SpeechRecognitionTranscription {
 }
 export interface SpeechRecognitionOptions {
     locale?: string;
+    returnPartialResults?: boolean;
     onResult: (transcription: SpeechRecognitionTranscription) => void;
 }
 export interface SpeechRecognitionApi {
