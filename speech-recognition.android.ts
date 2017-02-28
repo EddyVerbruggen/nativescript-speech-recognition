@@ -111,10 +111,9 @@ export class SpeechRecognition implements SpeechRecognitionApi {
                   // TODO return alternatives in a future version, as well as the confidence (can be done on iOS as well)
                   for (let i = 0; i < transcripts.size(); i++) {
                     let transcript = transcripts.get(i);
-                    console.log(`--- trans ${i}: ${transcript}`);
                   }
                   options.onResult({
-                    text: transcripts[0], // the first one has the highest confidence
+                    text: transcripts.get(0), // the first one has the highest confidence
                     // confidence: confidences[0],
                     finished: true
                   })
