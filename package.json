@@ -39,6 +39,13 @@
     "name": "Eddy Verbruggen",
     "email": "eddyverbruggen@gmail.com"
   },
+  "contributors":[
+    {
+      "name": "Brad Martin",
+      "email": "bradwaynemartin@gmail.com",
+      "url": "https://github.com/bradmartin"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/EddyVerbruggen/nativescript-speech-recognition/issues"
   },
