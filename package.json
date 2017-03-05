@@ -1,6 +1,6 @@
 {
   "name": "nativescript-speech-recognition",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Speech to text plugin, leveraging iOS and Android's built-in recognition engines.",
   "main": "speech-recognition",
   "typings": "index.d.ts",
@@ -21,7 +21,8 @@
     "preparedemo": "npm run build && cd demo && tns plugin remove nativescript-speech-recognition && tns plugin add .. && tns install",
     "setup": "npm i && cd demo && npm i && cd .. && npm run build && cd demo && tns plugin add .. && cd ..",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0",
-    "changelog:add": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'"
+    "changelog:add": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'",
+    "dopublish": "npm run build; npm run changelog; npm publish"
   },
   "repository": {
     "type": "git",
