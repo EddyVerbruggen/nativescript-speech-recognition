@@ -44,7 +44,7 @@ private speechRecognition = new SpeechRecognition();
 
 public checkAvailability(): void {
   this.speechRecognition.available().then(
-    (avail: boolean) => console.log(available ? "YES!" : "NO"),
+    (available: boolean) => console.log(available ? "YES!" : "NO"),
     (err: string) => console.log(err)
   );
 }
