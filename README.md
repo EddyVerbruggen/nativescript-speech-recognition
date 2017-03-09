@@ -52,14 +52,16 @@ public checkAvailability(): void {
 
 ### `startListening`
 
-On iOS this will trigger two prompts: the first one to allow Apple to analyze the voice input. The user will see a consent screen which you can extend with your own message by adding a fragment like this to `app/App_Resources/iOS/Info.plist`:
+On iOS this will trigger two prompts:
+
+The first prompt requests to allow Apple to analyze the voice input. The user will see a consent screen which you can extend with your own message by adding a fragment like this to `app/App_Resources/iOS/Info.plist`:
 
 ```xml
 <key>NSSpeechRecognitionUsageDescription</key>
 <string>My custom recognition usage description. Overriding the default empty one in the plugin.</string>
 ```
 
-There's also one for the second popup, which asks access to the microphone:
+The second prompt requests access to the microphone:
 
 ```xml
 <key>NSMicrophoneUsageDescription</key>
