@@ -3,7 +3,7 @@
 This is the plugin [demo](https://github.com/EddyVerbruggen/nativescript-speech-recognition/tree/master/demo) in action..
 
 | ..while recognizing Dutch 🇳🇱 | .. after recognizing American-English 🇺🇸 |
---- | --- | ---
+| --- | --- |
 | <img src="https://github.com/EddyVerbruggen/nativescript-speech-recognition/raw/master/screenshots/ios-nl.jpg" width="375px" /> | <img src="https://github.com/EddyVerbruggen/nativescript-speech-recognition/raw/master/screenshots/ios-en.jpg" width="375px" /> |
 
 ## Installation
