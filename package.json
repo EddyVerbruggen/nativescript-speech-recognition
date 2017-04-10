@@ -22,7 +22,7 @@
     "setup": "npm i && cd demo && npm i && cd .. && npm run build && cd demo && tns plugin add .. && cd ..",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0",
     "changelog:add": "git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md'",
-    "prepublish": "npm run build && npm run changelog && npm publish"
+    "prepublish": "npm run build && npm run changelog"
   },
   "repository": {
     "type": "git",
