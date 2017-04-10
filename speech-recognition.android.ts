@@ -135,7 +135,10 @@ export class SpeechRecognition implements SpeechRecognitionApi {
         let intent = new android.content.Intent(android.speech.RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE_MODEL, android.speech.RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(android.speech.RecognizerIntent.EXTRA_CALLING_PACKAGE, "voice.recognition.test");
-        intent.putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE, "en"); // TODO
+        // if not set, the default will be used
+        if (options.locale) {
+          intent.putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE, options.locale);
+        }
         intent.putExtra(android.speech.RecognizerIntent.EXTRA_MAX_RESULTS, 100);
         loopHandler.post(new java.lang.Runnable({
           run: () => {
