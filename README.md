@@ -108,3 +108,6 @@ this.speechRecognition.stopListening().then(
   (errorMessage: string) => { console.log(`Stop error: ${errorMessage}`); }
 );
 ```
+
+## Usage with Angular
+Check out [this tutorial (YouTube)](https://www.youtube.com/watch?v=C5i_EYjfuTE) to learn how to use this plugin in a NativeScript-Angular app.
