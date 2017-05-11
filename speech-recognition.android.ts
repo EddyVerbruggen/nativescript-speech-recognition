@@ -139,6 +139,10 @@ export class SpeechRecognition implements SpeechRecognitionApi {
         if (options.locale) {
           intent.putExtra(android.speech.RecognizerIntent.EXTRA_LANGUAGE, options.locale);
         }
+        // to be able to receive partial results
+        if (options.returnPartialResults) {
+            intent.putExtra(android.speech.RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
+        }
         intent.putExtra(android.speech.RecognizerIntent.EXTRA_MAX_RESULTS, 100);
         loopHandler.post(new java.lang.Runnable({
           run: () => {
