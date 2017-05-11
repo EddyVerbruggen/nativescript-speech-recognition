@@ -17,10 +17,17 @@ export interface SpeechRecognitionOptions {
   returnPartialResults?: boolean;
 
   /**
-   * Thwe callback function invoked when speech is recognized.
+   * The callback function invoked when speech is recognized.
    * @param transcription
    */
   onResult: (transcription: SpeechRecognitionTranscription) => void;
+
+    /**
+     * The callback function invoked when partial results are available
+     * For this callback to work Use returnPartialResults option
+     * @param transcription
+     */
+  onPartialResult: (transcription: SpeechRecognitionTranscription) => void;
 }
 
 export interface SpeechRecognitionApi {
