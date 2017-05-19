@@ -6,6 +6,7 @@ export interface SpeechRecognitionOptions {
     locale?: string;
     returnPartialResults?: boolean;
     onResult: (transcription: SpeechRecognitionTranscription) => void;
+    onPartialResult: (transcription: SpeechRecognitionTranscription) => void;
 }
 export interface SpeechRecognitionApi {
     available(): Promise<boolean>;
