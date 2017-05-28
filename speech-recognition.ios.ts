@@ -100,16 +100,17 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   stopListening(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (this.audioEngine.running) {
-        this.audioEngine.stop();
-        this.recognitionRequest.endAudio();
-        // this.speechRecognizer.delegate = null;
-        this.speechRecognizer = null;
-        this.recognitionTask = null;
-        resolve();
-      } else {
+      if (!this.audioEngine.running) {
         reject("Not running");
+        return;
       }
+
+      this.audioEngine.stop();
+      this.recognitionRequest.endAudio();
+      // this.speechRecognizer.delegate = null;
+      this.speechRecognizer = null;
+      this.recognitionTask = null;
+      resolve();
     });
   }
 }
