@@ -1,11 +1,14 @@
 <a name="1.2.0"></a>
 # 1.2.0 (2017-05-28)
 
+* cleanup ([b53ac27](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/b53ac27))
 * .ignore fixes ([be0a69d](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/be0a69d))
 * updates SpeechRecognitionOptions interface with onPartialResult callback ([469ff36](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/469ff36))
 * ability to receive partial results on Android ([d971d3e](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/d971d3e))
 * Added YouTube link to an Angular video ([ee45704](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/ee45704))
 * bump ([7603a65](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/7603a65))
+* Device or Emulator? #9 ([4de4425](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/4de4425))
+* ignore some more ([0c37443](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/0c37443))
 
 
 
