@@ -26,6 +26,9 @@ From the command prompt go to your app's root folder and execute:
 tns plugin add nativescript-speech-recognition
 ```
 
+## Testing
+You'll need to test this on a real device as a Simulator/Emulator doesn't have speech recognition capabilities.
+
 ## API
 
 ### `available`
