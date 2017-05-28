@@ -8,7 +8,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   private onPermissionGranted: Function;
   private onPermissionRejected: Function;
-  private recognizer: android.speech.SpeechRecognizer;
+  private recognizer: android.speech.SpeechRecognizer = null;
 
   constructor() {
     let self = this;
@@ -25,6 +25,12 @@ export class SpeechRecognition implements SpeechRecognitionApi {
       }
       if (self.onPermissionGranted) {
         self.onPermissionGranted();
+      }
+    });
+
+    application.on(application.suspendEvent, (args: application.ApplicationEventData) => {
+      if (this.recognizer !== null) {
+        this.stopListening();
       }
     });
   }
@@ -84,6 +90,8 @@ export class SpeechRecognition implements SpeechRecognitionApi {
                * @param error code is defined in {@link SpeechRecognizer}
                */
               onError(error: number) {
+                console.log("Error: " + error);
+                reject("Error code: " + error);
               },
 
               /**
@@ -163,10 +171,18 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   stopListening(): Promise<any> {
     return new Promise((resolve, reject) => {
+      if (this.recognizer === null) {
+        reject("Not running");
+        return;
+      }
+
       let loopHandler = new android.os.Handler(android.os.Looper.getMainLooper());
       loopHandler.post(new java.lang.Runnable({
         run: () => {
           this.recognizer.stopListening();
+          this.recognizer.cancel();
+          this.recognizer.destroy();
+          this.recognizer = null;
           resolve();
         }
       }));
