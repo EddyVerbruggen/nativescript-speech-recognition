@@ -1,9 +1,12 @@
 # NativeScript Speech Recognition
 
+[![Build Status][build-status]][build-url]
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
 [![Twitter Follow][twitter-image]][twitter-url]
 
+[build-status]:https://travis-ci.org/EddyVerbruggen/nativescript-speech-recognition.svg?branch=master
+[build-url]:https://travis-ci.org/EddyVerbruggen/nativescript-speech-recognition
 [npm-image]:http://img.shields.io/npm/v/nativescript-speech-recognition.svg
 [npm-url]:https://npmjs.org/package/nativescript-speech-recognition
 [downloads-image]:http://img.shields.io/npm/dm/nativescript-speech-recognition.svg
@@ -45,7 +48,7 @@ speechRecognition.available().then(
 ```
 
 #### TypeScript
-```js
+```typescript
 // import the plugin
 import { SpeechRecognition } from "nativescript-speech-recognition";
 
@@ -79,7 +82,7 @@ The second prompt requests access to the microphone:
 ```
 
 #### TypeScript
-```js
+```typescript
 // import the options
 import { SpeechRecognitionTranscription } from "nativescript-speech-recognition";
 
@@ -87,6 +90,8 @@ this.speechRecognition.startListening(
   {
     // optional, uses the device locale by default
     locale: "en-US",
+    // set to true to get results back continuously
+    returnPartialResults: true,
     // this callback will be invoked repeatedly during recognition
     onResult: (transcription: SpeechRecognitionTranscription) => {
       console.log(`User said: ${transcription.text}`);
@@ -102,7 +107,7 @@ this.speechRecognition.startListening(
 ### `stopListening`
 
 #### TypeScript
-```js
+```typescript
 this.speechRecognition.stopListening().then(
   () => { console.log(`stopped listening`) },
   (errorMessage: string) => { console.log(`Stop error: ${errorMessage}`); }

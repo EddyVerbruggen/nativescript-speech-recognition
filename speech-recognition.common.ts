@@ -21,13 +21,6 @@ export interface SpeechRecognitionOptions {
    * @param transcription
    */
   onResult: (transcription: SpeechRecognitionTranscription) => void;
-
-    /**
-     * The callback function invoked when partial results are available
-     * For this callback to work Use returnPartialResults option
-     * @param transcription
-     */
-  onPartialResult: (transcription: SpeechRecognitionTranscription) => void;
 }
 
 export interface SpeechRecognitionApi {

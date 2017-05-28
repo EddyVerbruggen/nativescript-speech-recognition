@@ -8,7 +8,8 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": [
-            "dom"
+            "dom",
+            "es6"
         ],
         "pretty": true,
         "allowUnreachableCode": false,
@@ -23,7 +24,14 @@
             "./node_modules/@types",
             "./node_modules"
         ],
-        "types": []
+        "types": [],
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "./node_modules/tns-core-modules/*",
+                "./node_modules/*"
+            ]
+        }
     },
     "exclude": [
         "node_modules",

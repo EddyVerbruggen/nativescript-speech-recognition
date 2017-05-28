@@ -2,17 +2,17 @@
   "nativescript": {
     "id": "org.nativescript.speechrecognition",
     "tns-ios": {
-      "version": "2.5.0"
+      "version": "3.0.1"
     },
     "tns-android": {
-      "version": "2.5.0"
+      "version": "3.0.0"
     }
   },
   "dependencies": {
-    "nativescript-speech-recognition": "file:///Users/eddyverbruggen/sandboxes/nativescript-speech-recognition",
-    "nativescript-theme-core": "^1.0.2",
+    "nativescript-speech-recognition": "file:../",
+    "nativescript-theme-core": "^1.0.4",
     "nativescript-unit-test-runner": "^0.3.4",
-    "tns-core-modules": "^2.5.0"
+    "tns-core-modules": "^3.0.1"
   },
   "devDependencies": {
     "babel-traverse": "6.12.0",
@@ -24,7 +24,7 @@
     "karma-jasmine": "^1.0.2",
     "karma-nativescript-launcher": "^0.4.0",
     "lazy": "1.0.11",
-    "nativescript-dev-typescript": "^0.3.7",
-    "typescript": "^2.1.0"
+    "nativescript-dev-typescript": "^0.4.0",
+    "typescript": "^2.3.0"
   }
 }

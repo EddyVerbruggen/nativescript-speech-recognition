@@ -1,34 +1,45 @@
+<a name="1.2.0"></a>
+# 1.2.0 (2017-05-28)
+
+* .ignore fixes ([be0a69d](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/be0a69d))
+* updates SpeechRecognitionOptions interface with onPartialResult callback ([469ff36](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/469ff36))
+* ability to receive partial results on Android ([d971d3e](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/d971d3e))
+* Added YouTube link to an Angular video ([ee45704](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/ee45704))
+* bump ([7603a65](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/7603a65))
+
+
+
 <a name="1.1.3"></a>
 ## 1.1.3 (2017-04-10)
 
-* add support for language #5 ([2c57cac](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/2c57cac))
-* fix table formatting ([6b2a6aa](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/6b2a6aa))
-* Update README.md ([46607e9](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/46607e9))
-* Update README.md ([2168328](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/2168328))
+* add support for language #5 ([f90e237](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/f90e237))
+* fix table formatting ([b823de9](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/b823de9))
+* Update README.md ([c0da3e7](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/c0da3e7))
+* Update README.md ([06af1f8](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/06af1f8))
 
 
 
 <a name="1.1.2"></a>
 ## 1.1.2 (2017-03-05)
 
-* add contrib ([80a175c](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/80a175c))
-* bump ([0f3a90b](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/0f3a90b))
-* bump ([9b839fe](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/9b839fe))
-* Fix Android result transcript.text ([94916c0](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/94916c0))
-* Removed a note about Android ([f2f3514](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/f2f3514))
-* Update README.md ([9330a48](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/9330a48))
-* updated CHANGELOG.md ([803f30e](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/803f30e))
+* add contrib ([e348a75](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/e348a75))
+* bump ([48be4d9](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/48be4d9))
+* bump ([ad72ab6](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/ad72ab6))
+* Fix Android result transcript.text ([5960662](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/5960662))
+* Removed a note about Android ([920678d](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/920678d))
+* Update README.md ([ae44722](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/ae44722))
+* updated CHANGELOG.md ([2ad4eee](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/2ad4eee))
 
 
 
 <a name="1.1.0"></a>
 # 1.1.0 (2017-02-14)
 
-* Added Android ([213ff78](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/213ff78))
-* Doc++ ([4c17ae1](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/4c17ae1))
-* Doc++ ([eaf4305](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/eaf4305))
-* Enjoy, world! ([fa0b2d0](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/fa0b2d0))
-* run android demo on device ([e3ff0ce](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/e3ff0ce))
+* Added Android ([6cf5e8d](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/6cf5e8d))
+* Doc++ ([e64962a](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/e64962a))
+* Doc++ ([4e51922](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/4e51922))
+* Enjoy, world! ([eb6599c](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/eb6599c))
+* run android demo on device ([f7d69c6](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/f7d69c6))
 
 
 
