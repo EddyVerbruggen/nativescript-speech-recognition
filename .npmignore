@@ -6,3 +6,6 @@ screenshots/
 *.map
 *.ts
 !*.d.ts
+tsconfig.json
+references.d.ts
+CHANGELOG.md
