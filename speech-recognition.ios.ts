@@ -76,6 +76,8 @@ export class SpeechRecognition implements SpeechRecognitionApi {
               if (error !== null || (result !== null && result.final)) {
                 this.audioEngine.stop();
                 this.inputNode.removeTapOnBus(0);
+                this.audioSession.setCategoryError(AVAudioSessionCategoryPlayback);
+                this.audioSession.setModeError(AVAudioSessionModeDefault);
                 this.recognitionRequest = null;
                 this.recognitionTask = null;
               }
@@ -107,7 +109,8 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
       this.audioEngine.stop();
       this.recognitionRequest.endAudio();
-      // this.speechRecognizer.delegate = null;
+      this.audioSession.setCategoryError(AVAudioSessionCategoryPlayback);
+      this.audioSession.setModeError(AVAudioSessionModeDefault);
       this.speechRecognizer = null;
       this.recognitionTask = null;
       resolve();
