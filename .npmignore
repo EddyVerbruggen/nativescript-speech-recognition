@@ -9,3 +9,4 @@ screenshots/
 tsconfig.json
 references.d.ts
 CHANGELOG.md
+tslint.json

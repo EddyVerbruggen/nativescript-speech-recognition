@@ -1,3 +1,13 @@
+<a name="1.2.1"></a>
+## 1.2.1 (2017-08-26)
+
+* #14 Reset the audio session on iOS after recording ([18f964d](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/18f964d))
+* #15 Add a 'requestPermissions' method ([a054a22](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/a054a22))
+* cleanup ([371c0d0](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/371c0d0))
+* Plugin breaks when resuming app #7 ([99781bb](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/99781bb))
+
+
+
 <a name="1.2.0"></a>
 # 1.2.0 (2017-05-28)
 
