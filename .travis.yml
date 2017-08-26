@@ -22,7 +22,7 @@ cache:
 
 install:
     - nvm install node
-    - npm install -g nativescript
+    - echo no | npm install -g nativescript
     - tns usage-reporting disable
     - tns error-reporting disable
     - npm install
