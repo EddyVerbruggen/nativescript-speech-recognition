@@ -1,4 +1,4 @@
-import { Observable } from "data/observable";
+import { Observable } from "tns-core-modules/data/observable";
 import { SpeechRecognition, SpeechRecognitionTranscription } from "nativescript-speech-recognition";
 
 export class HelloWorldModel extends Observable {
@@ -10,6 +10,9 @@ export class HelloWorldModel extends Observable {
   constructor() {
     super();
     this.speechRecognition = new SpeechRecognition();
+
+    // Testing manual persmission. You don't need to do this.
+    setTimeout(() => this.requestPermission(), 1500);
   }
 
   public startListeningNL(): void {
@@ -53,6 +56,13 @@ export class HelloWorldModel extends Observable {
       that.set("listening", false);
     }, (errorMessage: string) => {
       console.log(`Error while trying to stop listening: ${errorMessage}`);
+    });
+  }
+
+  public requestPermission(): void {
+    let that = this;
+    this.speechRecognition.requestPermission().then((granted: boolean) => {
+      console.log("Granted? " + granted);
     });
   }
 }

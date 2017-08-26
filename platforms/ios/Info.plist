@@ -3,8 +3,8 @@
 <plist version="1.0">
   <dict>
     <key>NSSpeechRecognitionUsageDescription</key>
-    <string/>
+    <string> </string>
     <key>NSMicrophoneUsageDescription</key>
-    <string/>
+    <string> </string>
   </dict>
 </plist>

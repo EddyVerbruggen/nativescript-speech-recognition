@@ -34,5 +34,5 @@ before_script:
 
 script:
     - npm run setup
+    - npm run tslint
     - npm run demo.android
-    - npm run test.android

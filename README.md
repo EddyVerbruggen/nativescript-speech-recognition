@@ -55,15 +55,26 @@ speechRecognition.available().then(
 // import the plugin
 import { SpeechRecognition } from "nativescript-speech-recognition";
 
-// instantiate the plugin (assuming the code below is inside a Class)
-private speechRecognition = new SpeechRecognition();
-
-public checkAvailability(): void {
-  this.speechRecognition.available().then(
-    (available: boolean) => console.log(available ? "YES!" : "NO"),
-    (err: string) => console.log(err)
-  );
+class SomeClass {
+  private speechRecognition = new SpeechRecognition();
+  
+  public checkAvailability(): void {
+    this.speechRecognition.available().then(
+      (available: boolean) => console.log(available ? "YES!" : "NO"),
+      (err: string) => console.log(err)
+    );
+  }
 }
+```
+
+### `requestPermission`
+You can either let `startListening` handle permissions when needed, but if you want to have more control
+over when the permission popups are shown, you can use this function:
+
+```typescript
+this.speechRecognition.requestPermission().then((granted: boolean) => {
+  console.log("Granted? " + granted);
+});
 ```
 
 ### `startListening`

@@ -25,6 +25,7 @@ export interface SpeechRecognitionOptions {
 
 export interface SpeechRecognitionApi {
   available(): Promise<boolean>;
+  requestPermission(): Promise<boolean>;
   startListening(options: SpeechRecognitionOptions): Promise<boolean>;
   stopListening(): Promise<any>;
 }

@@ -17,7 +17,21 @@ export class SpeechRecognition implements SpeechRecognitionApi {
     return new Promise((resolve, reject) => {
       resolve(SFSpeechRecognizer.new().available);
     });
-  };
+  }
+
+  requestPermission(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      SFSpeechRecognizer.requestAuthorization((status: SFSpeechRecognizerAuthorizationStatus) => {
+        if (status !== SFSpeechRecognizerAuthorizationStatus.Authorized) {
+          resolve(false);
+          return;
+        }
+        AVAudioSession.sharedInstance().requestRecordPermission((granted: boolean) => {
+          resolve(granted);
+        });
+      });
+    });
+  }
 
   startListening(options: SpeechRecognitionOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {

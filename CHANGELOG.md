@@ -7,6 +7,7 @@
 * ability to receive partial results on Android ([d971d3e](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/d971d3e))
 * Added YouTube link to an Angular video ([ee45704](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/ee45704))
 * bump ([7603a65](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/7603a65))
+* changelog ([d804b5b](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/d804b5b))
 * Device or Emulator? #9 ([4de4425](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/4de4425))
 * ignore some more ([0c37443](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/0c37443))
 

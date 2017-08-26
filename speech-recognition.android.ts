@@ -1,6 +1,6 @@
 import { SpeechRecognitionApi, SpeechRecognitionOptions } from "./speech-recognition.common";
-import * as application from "application";
-import * as utils from "utils/utils";
+import * as application from "tns-core-modules/application";
+import * as utils from "tns-core-modules/utils/utils";
 
 declare let android: any;
 
@@ -39,7 +39,16 @@ export class SpeechRecognition implements SpeechRecognitionApi {
     return new Promise((resolve, reject) => {
       resolve(android.speech.SpeechRecognizer.isRecognitionAvailable(application.android.context));
     });
-  };
+  }
+
+  requestPermission(): Promise<boolean> {
+    console.log(">> requestPermission");
+    return new Promise((resolve, reject) => {
+      this._requestPermission(
+          () => resolve(true),
+          () => resolve(false));
+    });
+  }
 
   startListening(options: SpeechRecognitionOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -124,7 +133,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
                     text: transcripts.get(0), // the first one has the highest confidence
                     // confidence: confidences[0],
                     finished: true
-                  })
+                  });
                 }
               },
 
@@ -161,7 +170,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
       };
 
       if (!this.wasPermissionGranted()) {
-        this.requestPermission(onPermissionGranted, reject);
+        this._requestPermission(onPermissionGranted, reject);
         return;
       }
 
@@ -198,9 +207,9 @@ export class SpeechRecognition implements SpeechRecognitionApi {
               android.Manifest.permission.RECORD_AUDIO);
     }
     return hasPermission;
-  };
+  }
 
-  private requestPermission(onPermissionGranted: Function, reject): void {
+  private _requestPermission(onPermissionGranted: Function, reject): void {
     this.onPermissionGranted = onPermissionGranted;
     this.onPermissionRejected = reject;
     android.support.v4.app.ActivityCompat.requestPermissions(
