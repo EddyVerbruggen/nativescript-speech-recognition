@@ -1,3 +1,10 @@
+<a name="1.3.0"></a>
+## 1.3.0 (2017-09-16)
+
+* #16 The 'finished' boolean is not correct when partial results are requested ([243f73a](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/243f73a))
+
+
+
 <a name="1.2.1"></a>
 ## 1.2.1 (2017-08-26)
 
