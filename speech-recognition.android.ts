@@ -108,7 +108,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
                * @param results the recognition results. To retrieve the results in {@code
                */
               onResults(results: android.os.Bundle) {
-                this.sendBackResults(results);
+                this.sendBackResults(results, false);
               },
 
               /**
@@ -117,24 +117,26 @@ export class SpeechRecognition implements SpeechRecognitionApi {
                */
               onPartialResults(partialResults: android.os.Bundle) {
                 if (options.returnPartialResults) {
-                  this.sendBackResults(partialResults);
+                  this.sendBackResults(partialResults, true);
                 }
               },
 
-              sendBackResults(results: android.os.Bundle) {
+              sendBackResults(results: android.os.Bundle, partial: boolean) {
                 let transcripts = results.getStringArrayList(android.speech.SpeechRecognizer.RESULTS_RECOGNITION);
+                let transcript = null;
                 // let confidences = results.getFloatArray(android.speech.SpeechRecognizer.CONFIDENCE_SCORES);
                 if (!transcripts.isEmpty()) {
                   // TODO return alternatives in a future version, as well as the confidence (can be done on iOS as well)
-                  for (let i = 0; i < transcripts.size(); i++) {
-                    let transcript = transcripts.get(i);
-                  }
-                  options.onResult({
-                    text: transcripts.get(0), // the first one has the highest confidence
-                    // confidence: confidences[0],
-                    finished: true
-                  });
+                  // for (let i = 0; i < transcripts.size(); i++) {
+                  //   transcript = transcripts.get(i);
+                  // }
+                  transcript = transcripts.get(0); // the first one has the highest confidence
                 }
+                options.onResult({
+                  text: transcript,
+                  // confidence: confidences[0],
+                  finished: !partial
+                });
               },
 
               /**
