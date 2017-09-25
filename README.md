@@ -129,7 +129,7 @@ this.speechRecognition.stopListening().then(
 ```
 
 ## Demo app (Angular)
-This plugin is part of the [plugin showcase app](https://github.com/EddyVerbruggen/nativescript-pluginshowcase/tree/master/app/feedback) I built using Angular.
+This plugin is part of the [plugin showcase app](https://github.com/EddyVerbruggen/nativescript-pluginshowcase/tree/master/app/speech) I built using Angular.
 
 ### Angular video tutorial
 Rather watch a video? Check out [this tutorial on YouTube](https://www.youtube.com/watch?v=C5i_EYjfuTE).
