@@ -36,7 +36,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   startListening(options: SpeechRecognitionOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      const locale = NSLocale.alloc().initWithLocaleIdentifier(options.locale ? options.locale : NSLocale.preferredLanguages.firstObject);
+      const locale = NSLocale.alloc().initWithLocaleIdentifier(options.locale ? options.locale : device.language);
       this.speechRecognizer = SFSpeechRecognizer.alloc().initWithLocale(locale);
 
       if (this.recognitionTask !== null) {
