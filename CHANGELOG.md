@@ -1,3 +1,10 @@
+<a name="1.3.2"></a>
+## 1.3.2 (2018-03-28)
+
+* #19 Use the correct default locale on iOS #19 ([f0c7f0f](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/f0c7f0f))
+
+
+
 <a name="1.3.1"></a>
 ## 1.3.1 (2017-09-17)
 

@@ -118,6 +118,11 @@ this.speechRecognition.startListening(
 );
 ```
 
+##### Angular tip
+If you're using this plugin in Angular, then note that the `onResult` callback is not part of Angular's lifecycle.
+So either update the UI in [an `ngZone` as shown here](https://github.com/EddyVerbruggen/nativescript-pluginshowcase/blob/28f65ef98716ad7c4698071b9c394cceb2d9748f/app/speech/speech.component.ts#L154),
+or use [`ChangeDetectorRef` as shown here](https://blog.paulhalliday.io/2017/06/24/nativescript-speech-recognition/).
+
 ### `stopListening`
 
 #### TypeScript
