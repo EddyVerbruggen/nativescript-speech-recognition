@@ -1,4 +1,5 @@
 import { SpeechRecognitionApi, SpeechRecognitionOptions } from "./speech-recognition.common";
+import { device } from "tns-core-modules/platform";
 
 export class SpeechRecognition implements SpeechRecognitionApi {
 
@@ -15,7 +16,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   available(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      resolve(SFSpeechRecognizer.new().available);
+      resolve(parseInt(device.osVersion) >= 10);
     });
   }
 
@@ -35,22 +36,13 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   startListening(options: SpeechRecognitionOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      if (options.locale) {
-        let locale = NSLocale.alloc().initWithLocaleIdentifier(options.locale);
-        this.speechRecognizer = SFSpeechRecognizer.alloc().initWithLocale(locale);
-      } else {
-        this.speechRecognizer = SFSpeechRecognizer.new();
-      }
+      const locale = NSLocale.alloc().initWithLocaleIdentifier(options.locale ? options.locale : NSLocale.preferredLanguages.firstObject);
+      this.speechRecognizer = SFSpeechRecognizer.alloc().initWithLocale(locale);
 
       if (this.recognitionTask !== null) {
         this.recognitionTask.cancel();
         this.recognitionTask = null;
       }
-
-      // might as well not set this delegate
-      // this.speechRecognizer.delegate = SFSpeechRecognizerDelegateImpl.new().initWithCallback((available: boolean) => {
-      //   console.log("************ Availability changed to: " + available);
-      // });
 
       SFSpeechRecognizer.requestAuthorization((status: SFSpeechRecognizerAuthorizationStatus) => {
         if (status !== SFSpeechRecognizerAuthorizationStatus.Authorized) {
@@ -131,29 +123,3 @@ export class SpeechRecognition implements SpeechRecognitionApi {
     });
   }
 }
-
-/*
-class SFSpeechRecognizerDelegateImpl extends NSObject implements SFSpeechRecognizerDelegate {
-  public static ObjCProtocols = [SFSpeechRecognizerDelegate];
-
-  static new(): SFSpeechRecognizerDelegateImpl {
-    return <SFSpeechRecognizerDelegateImpl>super.new();
-  }
-
-  private _callback: (available: boolean) => void;
-
-  public initWithCallback(callback: (available: boolean) => void): SFSpeechRecognizerDelegateImpl {
-    this._callback = callback;
-    return this;
-  }
-
-  public speechRecognizerAvailabilityDidChange(speechRecognizer: SFSpeechRecognizer, available: boolean): void {
-    if (this._callback) {
-      this._callback(available);
-    } else {
-      console.trace();
-      console.log("--- callback lost");
-    }
-  }
-}
-*/

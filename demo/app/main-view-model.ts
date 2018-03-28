@@ -15,6 +15,10 @@ export class HelloWorldModel extends Observable {
     setTimeout(() => this.requestPermission(), 1500);
   }
 
+  public startListeningDefault(): void {
+    this.startListening();
+  }
+
   public startListeningNL(): void {
     this.startListening("nl-NL");
   }
@@ -23,7 +27,7 @@ export class HelloWorldModel extends Observable {
     this.startListening("en-US");
   }
 
-  public startListening(locale: string): void {
+  public startListening(locale?: string): void {
     let that = this;
 
     this.speechRecognition.available().then((avail: boolean) => {
