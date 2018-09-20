@@ -101,6 +101,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
               onError(error: number) {
                 console.log("Error: " + error);
                 reject("Error code: " + error);
+                options.onError(error);
               },
 
               /**

@@ -21,6 +21,12 @@ export interface SpeechRecognitionOptions {
    * @param transcription
    */
   onResult: (transcription: SpeechRecognitionTranscription) => void;
+
+  /**
+   * The callback function invoked when an error occurs during speech recognition
+   * @param error
+   */
+  onError?: (error: number) => void;
 }
 
 export interface SpeechRecognitionApi {
