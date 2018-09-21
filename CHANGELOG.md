@@ -1,8 +1,10 @@
-<a name="1.4.0"></a>
-## 1.4.0 (2018-09-21)
+<a name="1.4.1"></a>
+## <small>1.4.1 (2018-09-21)</small>
 
+* - https://github.com/EddyVerbruggen/nativescript-speech-recognition/pull/23 ([e040e13](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/e040e13))
 * Added onError callback to options. Only called in Android. ([bd64fde](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/bd64fde))
 * Link to where error code constants and their meaning can be found. ([00508ea](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/00508ea))
+* Publish the aar instead of the manifest ([994b9a0](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/994b9a0))
 * Use the correct default locale on iOS #19 -- this is actually a better (but identical) fix.. just le ([8288f9b](https://github.com/EddyVerbruggen/nativescript-speech-recognition/commit/8288f9b)), closes [#19](https://github.com/EddyVerbruggen/nativescript-speech-recognition/issues/19)
 
 
