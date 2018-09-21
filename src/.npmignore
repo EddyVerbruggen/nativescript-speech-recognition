@@ -3,3 +3,4 @@
 !speech-recognition.*.d.ts
 !index.d.ts
 tsconfig.json
+platforms/android/AndroidManifest.xml
