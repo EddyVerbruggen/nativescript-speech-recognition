@@ -1,0 +1,5 @@
+*.ts
+*.map
+!speech-recognition.*.d.ts
+!index.d.ts
+tsconfig.json

@@ -46,6 +46,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
       SFSpeechRecognizer.requestAuthorization((status: SFSpeechRecognizerAuthorizationStatus) => {
         if (status !== SFSpeechRecognizerAuthorizationStatus.Authorized) {
+          options.onError && options.onError("Not authorized");
           reject("Not authorized");
           return;
         }
@@ -57,12 +58,14 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
         this.recognitionRequest = SFSpeechAudioBufferRecognitionRequest.new();
         if (!this.recognitionRequest) {
+          options.onError && options.onError("Unable to create an SFSpeechAudioBufferRecognitionRequest object");
           reject("Unable to create an SFSpeechAudioBufferRecognitionRequest object");
           return;
         }
 
         this.inputNode = this.audioEngine.inputNode;
         if (!this.inputNode) {
+          options.onError && options.onError("Audio engine has no input node");
           reject("Audio engine has no input node");
           return;
         }
@@ -90,6 +93,8 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
               if (error !== null) {
                 console.log("error in handler: " + error.localizedDescription);
+                options.onError && options.onError(error.localizedDescription);
+                // no need to 'reject' as the promise has been resolved by now anyway
               }
             });
 

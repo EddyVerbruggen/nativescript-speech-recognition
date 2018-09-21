@@ -96,12 +96,14 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
               /**
                * A network or recognition error occurred.
+               * Or just keep silent for a few seconds.
                * @param error code is defined in {@link SpeechRecognizer}
                */
               onError(error: number) {
                 console.log("Error: " + error);
-                reject("Error code: " + error);
-                options.onError(error);
+                // not that if resolve() already ran, reject() won't have effect. That's why we also invoke the 'onError' callback.
+                options.onError && options.onError(error);
+                reject(error);
               },
 
               /**

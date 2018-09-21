@@ -1,4 +1,5 @@
 import { Observable } from "tns-core-modules/data/observable";
+import { isAndroid } from "tns-core-modules/platform";
 import { SpeechRecognition, SpeechRecognitionTranscription } from "nativescript-speech-recognition";
 
 export class HelloWorldModel extends Observable {
@@ -28,7 +29,7 @@ export class HelloWorldModel extends Observable {
   }
 
   public startListening(locale?: string): void {
-    let that = this;
+    let that = this; // TODO remove 'that'
 
     this.speechRecognition.available().then((avail: boolean) => {
       if (!avail) {
@@ -37,19 +38,29 @@ export class HelloWorldModel extends Observable {
       }
       that.speechRecognition.startListening(
           {
+            returnPartialResults: true,
+            locale: locale,
             onResult: (transcription: SpeechRecognitionTranscription) => {
               that.set("feedback", transcription.text);
               if (transcription.finished) {
                 that.set("listening", false);
               }
             },
-            returnPartialResults: true,
-            locale: locale
+            onError: (error: string | number) => {
+              console.log(">>>> error: " + error);
+              // because of the way iOS and Android differ, this is either:
+              // - iOS: A 'string', describing the issue.
+              // - Android: A 'number', referencing an 'ERROR_*' constant from https://developer.android.com/reference/android/speech/SpeechRecognizer.
+              //            If that code is either 6 or 7 you may want to restart listening.
+              if (isAndroid && error === 6 /* timeout */) {
+                // that.startListening(locale);
+              }
+            }
           }
       ).then((started: boolean) => {
         that.set("listening", true);
-      }, (errorMessage: string) => {
-        console.log(`Error while trying to start listening: ${errorMessage}`);
+      }).catch((error: string | number) => {
+        console.log(`Error while trying to start listening: ${error}`);
       });
     });
   }

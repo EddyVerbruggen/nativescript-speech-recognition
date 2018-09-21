@@ -111,11 +111,20 @@ this.speechRecognition.startListening(
       console.log(`User said: ${transcription.text}`);
       console.log(`User finished?: ${transcription.finished}`);
     },
+    onError: (error: string | number) => {
+      // because of the way iOS and Android differ, this is either:
+      // - iOS: A 'string', describing the issue. 
+      // - Android: A 'number', referencing an 'ERROR_*' constant from https://developer.android.com/reference/android/speech/SpeechRecognizer.
+      //            If that code is either 6 or 7 you may want to restart listening.
+    }
   }
 ).then(
   (started: boolean) => { console.log(`started listening`) },
   (errorMessage: string) => { console.log(`Error: ${errorMessage}`); }
-);
+).catch((error: string | number) => {
+  // same as the 'onError' handler, but this may not return if the error occurs after listening has successfully started (because that resolves the promise,
+  // hence the' onError' handler was created.
+});
 ```
 
 ##### Angular tip

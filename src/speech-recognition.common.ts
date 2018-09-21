@@ -23,10 +23,13 @@ export interface SpeechRecognitionOptions {
   onResult: (transcription: SpeechRecognitionTranscription) => void;
 
   /**
+   * TODO iOS, README
    * The callback function invoked when an error occurs during speech recognition
-   * @param error error code constants from https://developer.android.com/reference/android/speech/SpeechRecognizer
+   * @param error:
+   *   - iOS: (string) description of the error.
+   *   - Android: (number) 'ERROR_*' constant from https://developer.android.com/reference/android/speech/SpeechRecognizer.
    */
-  onError?: (error: number) => void;
+  onError?: (error: string | number) => void;
 }
 
 export interface SpeechRecognitionApi {
