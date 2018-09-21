@@ -24,7 +24,7 @@ export interface SpeechRecognitionOptions {
 
   /**
    * The callback function invoked when an error occurs during speech recognition
-   * @param error
+   * @param error error code constants from https://developer.android.com/reference/android/speech/SpeechRecognizer
    */
   onError?: (error: number) => void;
 }
