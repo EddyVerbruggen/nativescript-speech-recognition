@@ -2,7 +2,14 @@ import { SpeechRecognitionApi, SpeechRecognitionOptions } from "./speech-recogni
 import * as application from "tns-core-modules/application";
 import * as utils from "tns-core-modules/utils/utils";
 
-declare let android: any;
+declare let android, global: any;
+
+const AppPackageName = useAndroidX() ? global.androidx.core.app : android.support.v4.app;
+const ContentPackageName = useAndroidX() ? global.androidx.core.content : android.support.v4.content;
+
+function useAndroidX () {
+  return global.androidx && global.androidx.appcompat;
+}
 
 export class SpeechRecognition implements SpeechRecognitionApi {
 
@@ -207,7 +214,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
     let hasPermission = android.os.Build.VERSION.SDK_INT < 23; // Android M. (6.0)
     if (!hasPermission) {
       hasPermission = android.content.pm.PackageManager.PERMISSION_GRANTED ===
-          android.support.v4.content.ContextCompat.checkSelfPermission(
+          ContentPackageName.ContextCompat.checkSelfPermission(
               utils.ad.getApplicationContext(),
               android.Manifest.permission.RECORD_AUDIO);
     }
@@ -217,7 +224,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
   private _requestPermission(onPermissionGranted: Function, reject): void {
     this.onPermissionGranted = onPermissionGranted;
     this.onPermissionRejected = reject;
-    android.support.v4.app.ActivityCompat.requestPermissions(
+    AppPackageName.ActivityCompat.requestPermissions(
         application.android.foregroundActivity, // TODO application.android.context
         [android.Manifest.permission.RECORD_AUDIO],
         444 // irrelevant since we simply invoke onPermissionGranted
