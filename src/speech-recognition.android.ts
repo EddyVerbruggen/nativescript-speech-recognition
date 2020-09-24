@@ -1,11 +1,10 @@
 import { SpeechRecognitionApi, SpeechRecognitionOptions } from "./speech-recognition.common";
-import * as application from "tns-core-modules/application";
-import * as utils from "tns-core-modules/utils/utils";
+import { AndroidApplication, Application, ApplicationEventData, Utils} from "@nativescript/core";
 
-declare let android, global: any;
+declare let global: any;
 
 const AppPackageName = useAndroidX() ? global.androidx.core.app : android.support.v4.app;
-const ContentPackageName = useAndroidX() ? global.androidx.core.content : android.support.v4.content;
+const ContentPackageName = useAndroidX() ? global.androidx.core.content : (android.support.v4 as any).content;
 
 function useAndroidX () {
   return global.androidx && global.androidx.appcompat;
@@ -19,7 +18,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   constructor() {
     let self = this;
-    application.android.on(application.AndroidApplication.activityRequestPermissionsEvent, function (args: any) {
+    Application.android.on(AndroidApplication.activityRequestPermissionsEvent, function (args: any) {
       for (let i = 0; i < args.permissions.length; i++) {
         if (args.grantResults[i] === android.content.pm.PackageManager.PERMISSION_DENIED) {
           if (self.onPermissionRejected) {
@@ -35,7 +34,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
       }
     });
 
-    application.on(application.suspendEvent, (args: application.ApplicationEventData) => {
+    Application.on(Application.suspendEvent, (args: ApplicationEventData) => {
       if (this.recognizer !== null) {
         this.stopListening();
       }
@@ -44,7 +43,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   available(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      resolve(android.speech.SpeechRecognizer.isRecognitionAvailable(application.android.context));
+      resolve(android.speech.SpeechRecognizer.isRecognitionAvailable(Utils.android.getApplicationContext()));
     });
   }
 
@@ -65,7 +64,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
         let loopHandler = new android.os.Handler(android.os.Looper.getMainLooper());
         loopHandler.post(new java.lang.Runnable({
           run: () => {
-            this.recognizer = android.speech.SpeechRecognizer.createSpeechRecognizer(application.android.context);
+            this.recognizer = android.speech.SpeechRecognizer.createSpeechRecognizer(Utils.android.getApplicationContext());
             this.recognizer.setRecognitionListener(new android.speech.RecognitionListener({
               /**
                * Called when the endpointer is ready for the user to start speaking.
@@ -215,7 +214,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
     if (!hasPermission) {
       hasPermission = android.content.pm.PackageManager.PERMISSION_GRANTED ===
           ContentPackageName.ContextCompat.checkSelfPermission(
-              utils.ad.getApplicationContext(),
+              Utils.android.getApplicationContext(),
               android.Manifest.permission.RECORD_AUDIO);
     }
     return hasPermission;
@@ -225,7 +224,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
     this.onPermissionGranted = onPermissionGranted;
     this.onPermissionRejected = reject;
     AppPackageName.ActivityCompat.requestPermissions(
-        application.android.foregroundActivity, // TODO application.android.context
+        Application.android.foregroundActivity || Application.android.startActivity, // TODO application.android.context
         [android.Manifest.permission.RECORD_AUDIO],
         444 // irrelevant since we simply invoke onPermissionGranted
     );
