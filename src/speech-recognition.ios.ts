@@ -1,5 +1,5 @@
+import { Device } from "@nativescript/core";
 import { SpeechRecognitionApi, SpeechRecognitionOptions } from "./speech-recognition.common";
-import { device } from "tns-core-modules/platform";
 
 export class SpeechRecognition implements SpeechRecognitionApi {
 
@@ -16,7 +16,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   available(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      resolve(parseInt(device.osVersion) >= 10);
+      resolve(parseInt(Device.osVersion) >= 10);
     });
   }
 
@@ -36,7 +36,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   startListening(options: SpeechRecognitionOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      const locale = NSLocale.alloc().initWithLocaleIdentifier(options.locale ? options.locale : device.language);
+      const locale = NSLocale.alloc().initWithLocaleIdentifier(options.locale ? options.locale : Device.language);
       this.speechRecognizer = SFSpeechRecognizer.alloc().initWithLocale(locale);
 
       if (this.recognitionTask !== null) {

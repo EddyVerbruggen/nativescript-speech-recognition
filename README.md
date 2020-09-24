@@ -22,8 +22,14 @@ This is the plugin [demo](https://github.com/EddyVerbruggen/nativescript-speech-
 ## Installation
 From the command prompt go to your app's root folder and execute:
 
+### NativeScript 7+:
+```bash
+ns plugin add nativescript-speech-recognition
 ```
-tns plugin add nativescript-speech-recognition
+
+### NativeScript < 7:
+```
+tns plugin add nativescript-speech-recognition@1.5.0
 ```
 
 ## Testing
