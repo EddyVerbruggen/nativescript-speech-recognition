@@ -1,5 +1,4 @@
-import { Observable } from "tns-core-modules/data/observable";
-import { isAndroid } from "tns-core-modules/platform";
+import { Observable, isAndroid } from "@nativescript/core";
 import { SpeechRecognition, SpeechRecognitionTranscription } from "nativescript-speech-recognition";
 
 export class HelloWorldModel extends Observable {

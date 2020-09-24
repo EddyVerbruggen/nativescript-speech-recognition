@@ -1,26 +1,23 @@
 {
-  "nativescript": {
-    "id": "org.nativescript.plugin.speechrecognition",
-    "tns-ios": {
-      "version": "6.0.0-rc-2019-06-28-105002-01"
-    },
-    "tns-android": {
-      "version": "6.0.0-rc-2019-06-27-172817-03"
-    }
-  },
   "dependencies": {
     "nativescript-speech-recognition": "../src",
-    "nativescript-theme-core": "~1.0.6",
+    "@nativescript/theme": "~2.3.3",
     "nativescript-unit-test-runner": "~0.6.4",
-    "tns-core-modules": "6.0.0-rc-2019-06-28-175837-02"
+    "@nativescript/core": "~7.0.5"
   },
   "devDependencies": {
+    "@nativescript/android": "7.0.0",
+    "@nativescript/ios": "7.0.0",
+    "@nativescript/types": "~7.0.4",
+    "@nativescript/webpack": "~3.0.4",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
     "babylon": "6.18.0",
     "lazy": "1.0.11",
-    "nativescript-dev-webpack": "1.0.0-rc-2019-07-02-161545-02",
-    "tns-platform-declarations": "6.0.0-rc-2019-06-28-175837-02",
-    "typescript": "3.4.1"
+    "typescript": "~3.9.7"
+  },
+  "main": "app.js",
+  "scripts": {
+    "build.plugin": "cd ../src && npm run build"
   }
 }
