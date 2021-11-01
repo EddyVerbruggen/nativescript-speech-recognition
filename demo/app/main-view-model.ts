@@ -1,4 +1,4 @@
-import { Observable, isAndroid } from "@nativescript/core";
+import { Observable, isAndroid, Folder, knownFolders, path } from "@nativescript/core";
 import { SpeechRecognition, SpeechRecognitionTranscription } from "nativescript-speech-recognition";
 
 export class HelloWorldModel extends Observable {
@@ -19,6 +19,14 @@ export class HelloWorldModel extends Observable {
     this.startListening();
   }
 
+  public startListeningFromFile(): void {
+    let audio = "../audio/alex.mp3";
+    const appPath: Folder = <Folder>knownFolders.currentApp();
+    const folder: Folder = <Folder>appPath.getFolder(path.join("audio"));
+    const file: string = folder.getFile(audio).path;
+    this.startListening("en-US", true, file);
+  }
+
   public startListeningNL(): void {
     this.startListening("nl-NL");
   }
@@ -27,22 +35,28 @@ export class HelloWorldModel extends Observable {
     this.startListening("en-US");
   }
 
-  public startListening(locale?: string): void {
-    let that = this; // TODO remove 'that'
+  /**
+   * local: is the local like en-US
+   * fromFile: if set to true you will need to provide a `path` for the audio file
+   * path: the file path
+   */
+  public startListening(locale?: string, fromFile: boolean = false, path?: string): void {
 
     this.speechRecognition.available().then((avail: boolean) => {
       if (!avail) {
-        that.set("feedback", "speech recognition not available");
+        this.set("feedback", "speech recognition not available");
         return;
       }
-      that.speechRecognition.startListening(
+      this.speechRecognition.startListening(
           {
             returnPartialResults: true,
             locale: locale,
+            fromFile: fromFile,
+            path: path,
             onResult: (transcription: SpeechRecognitionTranscription) => {
-              that.set("feedback", transcription.text);
+              this.set("feedback", transcription.text);
               if (transcription.finished) {
-                that.set("listening", false);
+                this.set("listening", false);
               }
             },
             onError: (error: string | number) => {
@@ -50,14 +64,14 @@ export class HelloWorldModel extends Observable {
               // because of the way iOS and Android differ, this is either:
               // - iOS: A 'string', describing the issue.
               // - Android: A 'number', referencing an 'ERROR_*' constant from https://developer.android.com/reference/android/speech/SpeechRecognizer.
-              //            If that code is either 6 or 7 you may want to restart listening.
+              //            If this code is either 6 or 7 you may want to restart listening.
               if (isAndroid && error === 6 /* timeout */) {
-                // that.startListening(locale);
+                // this.startListening(locale);
               }
             }
           }
       ).then((started: boolean) => {
-        that.set("listening", true);
+        this.set("listening", true);
       }).catch((error: string | number) => {
         console.log(`Error while trying to start listening: ${error}`);
       });
@@ -65,16 +79,14 @@ export class HelloWorldModel extends Observable {
   }
 
   public stopListening(): void {
-    let that = this;
     this.speechRecognition.stopListening().then(() => {
-      that.set("listening", false);
+      this.set("listening", false);
     }, (errorMessage: string) => {
       console.log(`Error while trying to stop listening: ${errorMessage}`);
     });
   }
 
   public requestPermission(): void {
-    let that = this;
     this.speechRecognition.requestPermission().then((granted: boolean) => {
       console.log("Granted? " + granted);
     });

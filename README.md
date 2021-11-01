@@ -133,6 +133,58 @@ this.speechRecognition.startListening(
 });
 ```
 
+##### IOS ONLY
+You can enable speech recognition from an audio file
+
+>>> please no, if your audio file is short (about ~10 seconds) the stop function will not stop the recognition due to processing speed, with larger file there is no problem
+
+```typescript
+// import the options
+import { SpeechRecognitionTranscription } from "nativescript-speech-recognition";
+
+// do not fogred to add your audio folder/files to the webpack.config.js
+// webpack.Utils.addCopyRule("audio/**");
+let audio = '../audio/alex.mp3'
+const appPath: Folder = <Folder>knownFolders.currentApp();
+const folder: Folder = <Folder>appPath.getFolder(path.join("audio"));
+const file: string = folder.getFile(audio).path;
+
+this.speechRecognition.available().then((avail: boolean) => {
+    if (!avail) {
+    this.set("feedback", "speech recognition not available");
+    return;
+    }
+    this.speechRecognition.startListening(
+        {
+        returnPartialResults: true,
+        locale: "en-US",
+        fromFile: true,
+        path: file,
+        onResult: (transcription: SpeechRecognitionTranscription) => {
+            this.set("feedback", transcription.text);
+            if (transcription.finished) {
+            this.set("listening", false);
+            }
+        },
+        onError: (error: string | number) => {
+            console.log(">>>> error: " + error);
+            // because of the way iOS and Android differ, this is either:
+            // - iOS: A 'string', describing the issue.
+            // - Android: A 'number', referencing an 'ERROR_*' constant from https://developer.android.com/reference/android/speech/SpeechRecognizer.
+            //            If this code is either 6 or 7 you may want to restart listening.
+            if (isAndroid && error === 6 /* timeout */) {
+            // this.startListening(locale);
+            }
+        }
+        }
+    ).then((started: boolean) => {
+    this.set("listening", true);
+    }).catch((error: string | number) => {
+    console.log(`Error while trying to start listening: ${error}`);
+    });
+});
+```
+
 ##### Angular tip
 If you're using this plugin in Angular, then note that the `onResult` callback is not part of Angular's lifecycle.
 So either update the UI in [an `ngZone` as shown here](https://github.com/EddyVerbruggen/nativescript-pluginshowcase/blob/28f65ef98716ad7c4698071b9c394cceb2d9748f/app/speech/speech.component.ts#L154),

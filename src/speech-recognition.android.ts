@@ -2,6 +2,7 @@ import { SpeechRecognitionApi, SpeechRecognitionOptions } from "./speech-recogni
 import { AndroidApplication, Application, ApplicationEventData, Utils} from "@nativescript/core";
 
 declare let global: any;
+declare let native: any;
 
 const AppPackageName = useAndroidX() ? global.androidx.core.app : android.support.v4.app;
 const ContentPackageName = useAndroidX() ? global.androidx.core.content : (android.support.v4 as any).content;
@@ -58,8 +59,12 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
   startListening(options: SpeechRecognitionOptions): Promise<boolean> {
     return new Promise((resolve, reject) => {
+        if (options.fromFile) {
+            reject("Speech recognition from an audio file is not supported for Android!!");
+            return;
+        }
 
-      let onPermissionGranted = () => {
+        let onPermissionGranted = () => {
 
         function sendBackResults(results: android.os.Bundle, partial: boolean) {
           let transcripts = results.getStringArrayList(android.speech.SpeechRecognizer.RESULTS_RECOGNITION);
@@ -109,7 +114,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
                * More sound has been received. The purpose of this function is to allow giving feedback to the user regarding the captured audio. There is no guarantee that this method will be called.
                * @param buffer a buffer containing a sequence of big-endian 16-bit integers representing a
                */
-              onBufferReceived(buffer: native.Array<number>) {
+              onBufferReceived(buffer:  androidNative.Array<number>) {
               },
 
               /**
@@ -203,7 +208,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
           this.recognizer.cancel();
           this.recognizer.destroy();
           this.recognizer = null;
-          resolve();
+          resolve(true);
         }
       }));
     });
