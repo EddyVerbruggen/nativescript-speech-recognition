@@ -2,21 +2,22 @@
   "dependencies": {
     "nativescript-speech-recognition": "../src",
     "@nativescript/theme": "~2.3.3",
-    "nativescript-unit-test-runner": "~0.6.4",
-    "@nativescript/core": "~7.0.5"
+    "@nativescript/core": "~8.1.1",
+    "@nativescript/unit-test-runner": "~2.0.5"
   },
   "devDependencies": {
-    "@nativescript/android": "7.0.0",
-    "@nativescript/ios": "7.0.0",
-    "@nativescript/types": "~7.0.4",
-    "@nativescript/webpack": "~3.0.4",
+    "@nativescript/android": "~8.1.1",
+    "@nativescript/ios": "~8.1.0",
+    "@nativescript/types": "~8.1.0",
+    "@nativescript/webpack": "~5.0.0",
     "babel-traverse": "6.26.0",
     "babel-types": "6.26.0",
     "babylon": "6.18.0",
     "lazy": "1.0.11",
-    "typescript": "~3.9.7"
+    "typescript": "~4.3.5",
+    "karma-webpack": "~5.0.0"
   },
-  "main": "app.js",
+  "main": "./app/app.ts",
   "scripts": {
     "build.plugin": "cd ../src && npm run build"
   }
