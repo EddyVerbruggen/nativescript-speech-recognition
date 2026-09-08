@@ -15,6 +15,8 @@ export class SpeechRecognition implements SpeechRecognitionApi {
   private onPermissionGranted: Function;
   private onPermissionRejected: Function;
   private recognizer: android.speech.SpeechRecognizer = null;
+  private listeningIntent: android.content.Intent = null;
+  private accumulatedText: string = "";
 
   constructor() {
     let self = this;
@@ -57,9 +59,12 @@ export class SpeechRecognition implements SpeechRecognitionApi {
   }
 
   startListening(options: SpeechRecognitionOptions): Promise<boolean> {
+    console.log(">> startListening");
     return new Promise((resolve, reject) => {
 
       let onPermissionGranted = () => {
+        // Capture 'this' context for use in callbacks
+        let self = this;
 
         function sendBackResults(results: android.os.Bundle, partial: boolean) {
           let transcripts = results.getStringArrayList(android.speech.SpeechRecognizer.RESULTS_RECOGNITION);
@@ -72,11 +77,33 @@ export class SpeechRecognition implements SpeechRecognitionApi {
             // }
             transcript = transcripts.get(0); // the first one has the highest confidence
           }
-          options.onResult({
-            text: transcript,
-            // confidence: confidences[0],
-            finished: !partial
-          });
+
+          // accumulate if listenContinuously is enabled
+          if (options.listenContinuously) {
+            // Only accumulate on final results (not partial)
+            if (!partial && transcript) {
+              if (self.accumulatedText.length > 0) {
+                self.accumulatedText += " " + transcript;
+              } else {
+                self.accumulatedText = transcript;
+              }
+              transcript = self.accumulatedText;
+            } else if (partial && transcript) {
+              // For partial results, append to accumulated text temporarily for display
+              transcript = self.accumulatedText.length > 0
+                ? self.accumulatedText + " " + transcript
+                : transcript;
+            }
+          }
+
+          // Only send results if we have actual text (not null/empty)
+          if (transcript) {
+            options.onResult({
+              text: transcript,
+              // confidence: confidences[0],
+              finished: !partial
+            });
+          }
         }
 
         let loopHandler = new android.os.Handler(android.os.Looper.getMainLooper());
@@ -125,9 +152,18 @@ export class SpeechRecognition implements SpeechRecognitionApi {
                */
               onError(error: number) {
                 console.log("Error: " + error);
-                // not that if resolve() already ran, reject() won't have effect. That's why we also invoke the 'onError' callback.
-                options.onError && options.onError(error);
-                reject(error);
+                // Restart listening on silence timeout if listenContinuously is enabled
+                if (options.listenContinuously && self.recognizer && self.listeningIntent &&
+                   (error === android.speech.SpeechRecognizer.ERROR_SPEECH_TIMEOUT ||
+                    error === android.speech.SpeechRecognizer.ERROR_NO_MATCH)) {
+                  // Cancel to clear internal state before restarting
+                  self.recognizer.cancel();
+                  self.recognizer.startListening(self.listeningIntent);
+                } else {
+                  // not that if resolve() already ran, reject() won't have effect. That's why we also invoke the 'onError' callback.
+                  options.onError && options.onError(error);
+                  reject(error);
+                }
               },
 
               /**
@@ -136,6 +172,10 @@ export class SpeechRecognition implements SpeechRecognitionApi {
                */
               onResults(results: android.os.Bundle) {
                 sendBackResults(results, false);
+                // Restart listening immediately if listenContinuously is enabled
+                if (options.listenContinuously && self.recognizer && self.listeningIntent) {
+                  self.recognizer.startListening(self.listeningIntent);
+                }
               },
 
               /**
@@ -172,6 +212,13 @@ export class SpeechRecognition implements SpeechRecognitionApi {
             intent.putExtra(android.speech.RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
         }
         intent.putExtra(android.speech.RecognizerIntent.EXTRA_MAX_RESULTS, 100);
+
+        // Store intent and reset accumulated text only for listenContinuously mode
+        if (options.listenContinuously) {
+          this.listeningIntent = intent;
+          this.accumulatedText = "";
+        }
+
         loopHandler.post(new java.lang.Runnable({
           run: () => {
             this.recognizer.startListening(intent);
@@ -203,6 +250,8 @@ export class SpeechRecognition implements SpeechRecognitionApi {
           this.recognizer.cancel();
           this.recognizer.destroy();
           this.recognizer = null;
+          this.listeningIntent = null;
+          this.accumulatedText = "";
           resolve();
         }
       }));

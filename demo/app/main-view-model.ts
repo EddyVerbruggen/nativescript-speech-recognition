@@ -27,7 +27,11 @@ export class HelloWorldModel extends Observable {
     this.startListening("en-US");
   }
 
-  public startListening(locale?: string): void {
+  public startListeningContinuously(): void {
+    this.startListening(undefined, true);
+  }
+
+  public startListening(locale?: string, listenContinuously?: boolean): void {
     let that = this; // TODO remove 'that'
 
     this.speechRecognition.available().then((avail: boolean) => {
@@ -39,9 +43,10 @@ export class HelloWorldModel extends Observable {
           {
             returnPartialResults: true,
             locale: locale,
+            listenContinuously: listenContinuously,
             onResult: (transcription: SpeechRecognitionTranscription) => {
               that.set("feedback", transcription.text);
-              if (transcription.finished) {
+              if (transcription.finished && !listenContinuously) {
                 that.set("listening", false);
               }
             },
@@ -50,10 +55,6 @@ export class HelloWorldModel extends Observable {
               // because of the way iOS and Android differ, this is either:
               // - iOS: A 'string', describing the issue.
               // - Android: A 'number', referencing an 'ERROR_*' constant from https://developer.android.com/reference/android/speech/SpeechRecognizer.
-              //            If that code is either 6 or 7 you may want to restart listening.
-              if (isAndroid && error === 6 /* timeout */) {
-                // that.startListening(locale);
-              }
             }
           }
       ).then((started: boolean) => {

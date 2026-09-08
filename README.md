@@ -112,6 +112,9 @@ this.speechRecognition.startListening(
     locale: "en-US",
     // set to true to get results back continuously
     returnPartialResults: true,
+    // set to true to keep listening after each speech utterance (Android only)
+    // when enabled, the recognizer automatically restarts after recognition completes
+    listenContinuously: false,
     // this callback will be invoked repeatedly during recognition
     onResult: (transcription: SpeechRecognitionTranscription) => {
       console.log(`User said: ${transcription.text}`);
@@ -121,7 +124,8 @@ this.speechRecognition.startListening(
       // because of the way iOS and Android differ, this is either:
       // - iOS: A 'string', describing the issue. 
       // - Android: A 'number', referencing an 'ERROR_*' constant from https://developer.android.com/reference/android/speech/SpeechRecognizer.
-      //            If that code is either 6 or 7 you may want to restart listening.
+      //            When listenContinuously is enabled, the recognizer will automatically restart
+      //            after errors, providing hands-free continuous voice input.
     }
   }
 ).then(
@@ -147,6 +151,47 @@ this.speechRecognition.stopListening().then(
   (errorMessage: string) => { console.log(`Stop error: ${errorMessage}`); }
 );
 ```
+
+## Continuous Listening Mode
+
+### Using `listenContinuously` Option
+
+You can enable **continuous listening mode** on **Android** by setting the `listenContinuously` option to `true`:
+
+```typescript
+this.speechRecognition.startListening({
+  locale: "en-US",
+  returnPartialResults: true,
+  listenContinuously: true,  // Enable continuous listening
+  onResult: (transcription: SpeechRecognitionTranscription) => {
+    console.log(`User said: ${transcription.text}`);
+    // transcription.finished will be true after each utterance,
+    // but listening continues automatically
+  },
+  onError: (error: string | number) => {
+    console.log(`Error: ${error}`);
+    // Recognizer will automatically restart after errors
+  }
+});
+```
+
+When `listenContinuously` is enabled:
+
+- **Automatic restart**: After each speech utterance completes, listening automatically restarts
+- **Continuous operation**: The recognizer keeps running until you explicitly call `stopListening()`
+- **Error recovery**: Automatically restarts after errors (including speech timeout)
+- **Text accumulation**: Recognized text accumulates across multiple utterances
+- **Hands-free experience**: Ideal for voice assistants and applications requiring continuous voice input
+
+To stop continuous listening, call `stopListening()`:
+
+```typescript
+this.speechRecognition.stopListening().then(() => {
+  console.log('Stopped continuous listening');
+});
+```
+
+**Note**: This feature is currently available on **Android only**. iOS support may be added in future versions.
 
 ## Demo app (Angular)
 This plugin is part of the [plugin showcase app](https://github.com/EddyVerbruggen/nativescript-pluginshowcase/tree/master/app/speech) I built using Angular.

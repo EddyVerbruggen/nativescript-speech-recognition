@@ -17,6 +17,13 @@ export interface SpeechRecognitionOptions {
   returnPartialResults?: boolean;
 
   /**
+   * Set to true to keep listening after each speech utterance.
+   * When enabled, the recognizer automatically restarts after recognition completes.
+   * Default: false (stops after one utterance).
+   */
+  listenContinuously?: boolean;
+
+  /**
    * The callback function invoked when speech is recognized.
    * @param transcription
    */
