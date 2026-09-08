@@ -1,6 +1,6 @@
 {
   "name": "nativescript-speech-recognition",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Speech to text plugin, leveraging iOS and Android's built-in recognition engines.",
   "main": "speech-recognition",
   "typings": "index.d.ts",
